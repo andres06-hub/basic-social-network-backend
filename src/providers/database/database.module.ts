@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { dataSource, databaseProviders } from './database.provider';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/models/user.entity';
 import { Post } from 'src/models/post.entity';
