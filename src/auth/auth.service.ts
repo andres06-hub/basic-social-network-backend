@@ -1,9 +1,10 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BcryptService } from 'src/common/services/bcrypt/bcrypt.service';
 import { User } from 'src/models/user.entity';
 import { Repository } from 'typeorm';
+import { IJwtPayload } from './interfaces/Idata';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
     if (!pwd) return 'incorrect';
     console.log(pwd);
     //Create JWT
-    const payload = {
+    const payload: IJwtPayload = {
       id: findUser.id,
       userName: findUser.userName,
     };
@@ -44,6 +45,21 @@ export class AuthService {
       const findUser: User | null = await this.userRpt.findOne({
         where: {
           email: email,
+        },
+      });
+      return findUser;
+    } catch (error) {
+      this.logger.error(error);
+      return false;
+    }
+  }
+
+  async findOneById(id: number): Promise<User | null | false> {
+    try {
+      this.logger.log('looking for user...');
+      const findUser: User | null = await this.userRpt.findOne({
+        where: {
+          id: id,
         },
       });
       return findUser;
