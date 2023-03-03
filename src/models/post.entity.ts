@@ -1,14 +1,8 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  Timestamp,
-} from 'typeorm';
-import { User } from './user.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IPost } from 'src/post/interfaces/data';
 
-@Entity({ name: 'Posts' })
-export class Post {
+@Entity({ name: 'Post' })
+export class Post implements IPost {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,8 +13,17 @@ export class Post {
   message: string;
 
   @Column('int')
-  createdAt: Timestamp;
+  createdAt: number;
 
-  @ManyToOne(() => User, (user) => user.posts)
-  user: User;
+  @Column({
+    nullable: true,
+    type: 'int',
+  })
+  updatedAt: number;
+
+  @Column({
+    nullable: false,
+    type: 'int',
+  })
+  userId: number;
 }
