@@ -1,4 +1,6 @@
 import { IsNotEmpty, MinLength, MaxLength } from 'class-validator';
+import { IPost } from '../interfaces/data';
+import { User } from 'src/models/user.entity';
 
 export class DataPostDto {
   @IsNotEmpty({
@@ -6,8 +8,8 @@ export class DataPostDto {
   })
   title: string;
 
-  @MinLength(50, {
-    message: 'message is too Length',
+  @MinLength(5, {
+    message: 'message is too short',
   })
   @MaxLength(255)
   message: string;
@@ -15,10 +17,17 @@ export class DataPostDto {
   @IsNotEmpty({
     message: 'Date is required!',
   })
-  craeteAt: number;
+  createdAt: number;
 
   @IsNotEmpty({
     message: 'userId is required!',
   })
   userId: number;
+}
+
+export class DataUpdateDto {
+  id: number;
+  title: string;
+  message: string;
+  updatedAt: number;
 }
