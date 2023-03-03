@@ -27,6 +27,7 @@ export class PostController {
 
   private logger = new Logger();
 
+  //Create one post
   @Post('createPost')
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard('jwt'))
@@ -42,6 +43,7 @@ export class PostController {
     return new Response(200, 'Posts Created!', result);
   }
 
+  //Show all posts
   @Get()
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard('jwt'))
@@ -55,6 +57,7 @@ export class PostController {
     return new Response(200, 'Posts', result);
   }
 
+  //Update Post
   @Post()
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard('jwt'))
@@ -70,6 +73,7 @@ export class PostController {
     return new Response(200, 'UPDATED!');
   }
 
+  //Show posts of one User
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard('jwt'))
@@ -80,5 +84,5 @@ export class PostController {
     return result;
   }
 
-  //FILTRAR
+  //FILTER
 }
