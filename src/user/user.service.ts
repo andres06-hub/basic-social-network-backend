@@ -22,9 +22,7 @@ export class UserService {
     this.logger.log('Creading User...');
     // Save DB
     const newUser: User = this.userRpt.create(data);
-    this.userRpt.save(newUser);
-    this.logger.log(newUser);
-    return newUser;
+    return this.userRpt.save(newUser);
   }
 
   async findOneByMail(email: string): Promise<User | null | false> {
