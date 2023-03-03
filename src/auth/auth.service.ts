@@ -1,5 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 import { BcryptService } from 'src/common/services/bcrypt/bcrypt.service';
 import { User } from 'src/models/user.entity';
 import { Repository } from 'typeorm';
@@ -7,8 +8,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('USER_REPOSITORY')
-    private userRepository: Repository<User>,
+    @InjectRepository(User) private userRpt: Repository<User>,
     private _bcryptSrv: BcryptService,
     private _jwtSrv: JwtService,
   ) {}
@@ -30,31 +30,18 @@ export class AuthService {
     //Create JWT
     const payload = {
       id: findUser.id,
-      username: findUser.username,
+      userName: findUser.userName,
     };
     const token = this._jwtSrv.sign(payload);
     //Return JWT
     return token;
   }
 
-  // async createUser(data: DataSignUp): Promise<User | boolean> {
-  //   const { password } = data;
-  //   //bcrypt psw
-  //   const pwdToHash: string = await this._bcryptSrv.bcryptToHash(password);
-  //   data = { ...data, password: pwdToHash };
-  //   this.logger.log('Creading User...');
-  //   // Save DB
-  //   const newUser: User = this.userRepository.create(data);
-  //   this.userRepository.save(newUser);
-  //   this.logger.log(newUser);
-  //   return newUser;
-  // }
-
   //DB
   async findOneByMail(email: string): Promise<User | null | false> {
     try {
       this.logger.log('looking for user...');
-      const findUser: User | null = await this.userRepository.findOne({
+      const findUser: User | null = await this.userRpt.findOne({
         where: {
           email: email,
         },

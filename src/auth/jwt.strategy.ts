@@ -17,6 +17,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     //TODO:Validar el usuario con los datos del Payload EJ:
     // const user = await this.userModel.findById(payload.id);
     // return user;
-    return { userId: payload.sub, username: payload.username };
+    return { userId: payload.sub, userName: payload.userName };
   }
 }
