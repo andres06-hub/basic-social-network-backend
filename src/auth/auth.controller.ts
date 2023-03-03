@@ -7,6 +7,8 @@ import {
   Logger,
   NotFoundException,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { DataLoginDto } from './dto/login.dto';
 import { AuthService } from './auth.service';
@@ -19,6 +21,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @UsePipes(ValidationPipe)
   async login(@Body() data: DataLoginDto) {
     console.log(data);
     const { email, password } = data;

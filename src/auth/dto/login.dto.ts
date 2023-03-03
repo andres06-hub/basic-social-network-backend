@@ -1,7 +1,9 @@
 import { IsEmail, IsNotEmpty, MinLength, MaxLength } from 'class-validator';
 
 export class DataLoginDto {
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: 'Requiered Email',
+  })
   @IsEmail()
   email: string;
 
