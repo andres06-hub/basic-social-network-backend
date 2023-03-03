@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, Timestamp } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from './post.entity';
 
 @Entity({ name: 'Users' })
 export class User {
@@ -14,9 +15,6 @@ export class User {
   @Column('text')
   password: string;
 
-  // @Column('text')
-  // message: string;
-
-  // @Column('int')
-  // dataTimeCreateAt: Timestamp;
+  @OneToMany(() => Post, (post) => post.user)
+  posts: Post[];
 }
