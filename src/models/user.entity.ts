@@ -6,7 +6,7 @@ export class User {
   id: number;
 
   @Column('text')
-  username: string;
+  userName: string;
 
   @Column('text')
   email: string;
@@ -14,9 +14,9 @@ export class User {
   @Column('text')
   password: string;
 
-  @Column('text')
-  message: string;
+  // @Column('text')
+  // message: string;
 
-  @Column('int')
-  dataTimeCreateAt: Timestamp;
+  // @Column('int')
+  // dataTimeCreateAt: Timestamp;
 }
