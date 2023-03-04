@@ -1,3 +1,33 @@
+- Installed or activated pnpm : [See more](https://pnpm.io/)
+
+```bash
+# activated
+corepack enable
+
+#Installed
+npm install -g pnpm
+```
+
+- then run: to install the dependencies
+
+```bash
+pnpm i
+```
+
+- Create app.env and db.env file
+
+```bash
+#db.env
+SQLITE_DB='database.sqlite'
+TYPE_DB='sqlite'
+
+#app.env
+PORT=<port>
+PREFIX='api'
+JWT_SECRET=<add_key>
+
+```
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
